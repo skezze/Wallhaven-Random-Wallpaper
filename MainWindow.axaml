@@ -2,11 +2,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="300" 
+        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="300"
 		x:Class="Wallhaven_Random_Wallpaper.MainWindow"
         Title="Wallhaven_Random_Wallpaper">
 	<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
 		<Button Name="button" Click="button_Click">Set random walpapper!</Button>
-		<CheckBox Name="checkbox" Click="checkBox_Click">work in the background</CheckBox>
+		<CheckBox Name="checkbox" Click="checkBox_Click">start together with windows</CheckBox>
 	</StackPanel>
+	<TrayIcon.Icons>
+		<TrayIcons>
+			<TrayIcon Icon="/favicon.ico"
+					  ToolTipText="Wallhaven Random Wallpaper">
+				<TrayIcon.Menu>
+					<NativeMenu>
+						<NativeMenuItem Header="Exit" Command="{Binding DoTheThing}"/>
+					</NativeMenu>
+				</TrayIcon.Menu>
+			</TrayIcon>
+		</TrayIcons>
+	</TrayIcon.Icons>
 </Window>

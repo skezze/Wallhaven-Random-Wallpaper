@@ -7,30 +7,31 @@
   <ItemGroup>
     <None Remove=".gitignore" />
     <None Remove="favicon.ico" />
+    <None Remove="Resources\favicon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.10" />
+    <AvaloniaResource Include="favicon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AvaloniaResource>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" Version="0.10.10" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.10" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Quartz" Version="3.4.0" />
+    <PackageReference Include="ReactiveUI" Version="18.3.1" />
     <PackageReference Include="System.Resources.Extensions" Version="6.0.0" />
-    <PackageReference Include="System.Text.Json" Version="6.0.0" />
+    <PackageReference Include="System.Text.Json" Version="6.0.5" />
    </ItemGroup>
   <ItemGroup>
-    <Resource Include="favicon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+    <Compile Update="MainWindow.axaml.cs">
+      <DependentUpon>MainWindow.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <None Update=".gitattributes">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

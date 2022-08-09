@@ -10,6 +10,10 @@ using Wallhaven_Random_Wallpaper.Methods;
 using System.Threading.Tasks;
 using Wallhaven_Random_Wallpaper.Models;
 using System.Threading;
+using Quartz.Impl;
+using Quartz;
+using ReactiveUI;
+using System.Reactive;
 
 namespace Wallhaven_Random_Wallpaper
 {
@@ -19,21 +23,20 @@ namespace Wallhaven_Random_Wallpaper
         public MainWindow()
         {
             InitializeComponent();
+            DoTheThing = ReactiveCommand.Create(Close);
 #if DEBUG
             this.AttachDevTools();
 #endif
         }
+        public ReactiveCommand<Unit, Unit> DoTheThing { get; }
 
         private void InitializeComponent()
         {
-            TrayIcon trayIcon = new TrayIcon();
-           
+
             AvaloniaXamlLoader.Load(this);
-            
-            
 
         }
-        public async void button_Click(object sender, RoutedEventArgs e)
+        public void button_Click(object sender, RoutedEventArgs e)
         {
             Temperatures temperatures = new Temperatures();
             string path = Path.GetTempPath();
@@ -44,16 +47,23 @@ namespace Wallhaven_Random_Wallpaper
         {
             // Change button text when button is clicked.
             var checkbox = (CheckBox)sender;
-            if (checkbox.IsChecked!=null) {
+            if (checkbox.IsChecked != null)
+            {
                 if (checkbox.IsChecked == true)
                 {
-                    //add to background
+                    Close(this);
                 }
-                else { 
-                //reset from baackground
+                else
+                {
+                    //reset from baackground
                 }
             }
 
+        }
+        public void closeApplication_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            // todo: not working TrayIcon. May be it`s bug of framework
         }
     }
 }
